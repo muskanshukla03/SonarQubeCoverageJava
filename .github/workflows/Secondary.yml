@@ -1,1 +1,14 @@
-hi
+name: Secondary Workflow
+on:
+    workflow_call:
+        inputs:
+            message:
+                description: 'Message to display'
+                required: true
+                type: string
+jobs:
+    display-message:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Display the message
+              run: echo "${{ inputs.message }}"
