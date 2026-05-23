@@ -13,19 +13,19 @@ on:
 jobs:
     build-job:
         if: contains(github.event.inputs['job-name'], 'build-job')
-        runs-on: if contains(github.event.inputs['runner'], 'ubuntu-latest') then 'ubuntu-latest' else if contains(github.event.inputs['runner'], 'windows-latest') then 'windows-latest' else if contains(github.event.inputs['runner'], 'macos-latest') then 'macos-latest' else 'ubuntu-latest'
+        runs-on: ${{ github.event.inputs['runner'] }}
         steps:
             - name: build the code
               run: echo "Building the code..."
     test-job:
         if: contains(github.event.inputs['job-name'], 'test-job')
-        runs-on: if contains(github.event.inputs['runner'], 'ubuntu-latest') then 'ubuntu-latest' else if contains(github.event.inputs['runner'], 'windows-latest') then 'windows-latest' else if contains(github.event.inputs['runner'], 'macos-latest') then 'macos-latest' else 'ubuntu-latest'
+        runs-on: ${{ github.event.inputs['runner'] }}
         steps:
             - name: run tests
               run: echo "Running tests..."  
     deploy-job:
         if: contains(github.event.inputs['job-name'], 'deploy-job')
-        runs-on: if contains(github.event.inputs['runner'], 'ubuntu-latest') then 'ubuntu-latest' else if contains(github.event.inputs['runner'], 'windows-latest') then 'windows-latest' else if contains(github.event.inputs['runner'], 'macos-latest') then 'macos-latest' else 'ubuntu-latest'
+        runs-on: ${{ github.event.inputs['runner'] }}
         steps:
             - name: deploy the code
               run: echo "Deploying the code..." 
