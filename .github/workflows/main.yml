@@ -3,6 +3,6 @@ on:
     workflow_dispatch:
 jobs:
     call-another:
-     uses: ./.github/workflows/secondary.yml
+     uses: ./.github/workflows/Secondary.yml
      with:
         message: "Hello from the main workflow!"
