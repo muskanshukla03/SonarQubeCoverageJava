@@ -3,14 +3,9 @@ on:
     workflow_dispatch:
         inputs:
             runner:
-                description: 'Select the runner to execute'
+                description: 'Select Multiple Job Runner'
                 required: true
-                default: 'ubuntu-latest'
-                type: choice
-                options:
-                    - ubuntu-latest
-                    - windows-latest
-                    - macos-latest
+                type: string
             job-name:
                 description: 'Enter multiple jobs to run (comma separated)'
                 required: true
@@ -18,19 +13,19 @@ on:
 jobs:
     build-job:
         if: contains(github.event.inputs['job-name'], 'build-job')
-        runs-on: ${{ github.event.inputs['runner'] }}
+        runs-on: if contains(github.event.inputs['runner'], 'ubuntu-latest') then 'ubuntu-latest' else if contains(github.event.inputs['runner'], 'windows-latest') then 'windows-latest' else if contains(github.event.inputs['runner'], 'macos-latest') then 'macos-latest' else 'ubuntu-latest'
         steps:
             - name: build the code
               run: echo "Building the code..."
     test-job:
         if: contains(github.event.inputs['job-name'], 'test-job')
-        runs-on: ${{ github.event.inputs['runner'] }}
+        runs-on: if contains(github.event.inputs['runner'], 'ubuntu-latest') then 'ubuntu-latest' else if contains(github.event.inputs['runner'], 'windows-latest') then 'windows-latest' else if contains(github.event.inputs['runner'], 'macos-latest') then 'macos-latest' else 'ubuntu-latest'
         steps:
             - name: run tests
               run: echo "Running tests..."  
     deploy-job:
         if: contains(github.event.inputs['job-name'], 'deploy-job')
-        runs-on: ${{ github.event.inputs['runner'] }}
+        runs-on: if contains(github.event.inputs['runner'], 'ubuntu-latest') then 'ubuntu-latest' else if contains(github.event.inputs['runner'], 'windows-latest') then 'windows-latest' else if contains(github.event.inputs['runner'], 'macos-latest') then 'macos-latest' else 'ubuntu-latest'
         steps:
             - name: deploy the code
               run: echo "Deploying the code..." 
