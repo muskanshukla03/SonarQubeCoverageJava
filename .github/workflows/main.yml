@@ -2,7 +2,7 @@ name: Main Workflow
 on:
     workflow_dispatch:
 jobs:
-    call-another-workflow:
+    call-another:
      uses: ./.github/workflows/secondary.yml
      with:
         message: "Hello from the main workflow!"
