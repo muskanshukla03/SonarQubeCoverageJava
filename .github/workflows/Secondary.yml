@@ -2,7 +2,7 @@ name: Secondary Workflow
 on:
     workflow_call:
         inputs:
-            messages:
+            message:
                 required: true
                 type: string
 jobs:
@@ -10,4 +10,4 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Display the message
-              run: echo "${{ inputs.messages }}"
+              run: echo "${{ inputs.message }}"
