@@ -1,31 +1,8 @@
-name: CI-MultipleJobsRunner
+name: Main Workflow
 on:
     workflow_dispatch:
-        inputs:
-            runner:
-                description: 'Select Multiple Job Runner'
-                required: true
-                type: string
-            job-name:
-                description: 'Enter multiple jobs to run (comma separated)'
-                required: true
-                type: string
 jobs:
-    build-job:
-        if: contains(github.event.inputs['job-name'], 'build-job')
-        runs-on: ${{ github.event.inputs['runner'] }}
-        steps:
-            - name: build the code
-              run: echo "Building the code..."
-    test-job:
-        if: contains(github.event.inputs['job-name'], 'test-job')
-        runs-on: ${{ github.event.inputs['runner'] }}
-        steps:
-            - name: run tests
-              run: echo "Running tests..."  
-    deploy-job:
-        if: contains(github.event.inputs['job-name'], 'deploy-job')
-        runs-on: ${{ github.event.inputs['runner'] }}
-        steps:
-            - name: deploy the code
-              run: echo "Deploying the code..." 
+    call-another-workflow:
+     uses: ./.github/workflows/secondary.yml
+     with:
+        message: "Hello from the main workflow!"
